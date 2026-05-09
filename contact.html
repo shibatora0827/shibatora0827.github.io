@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ICT-shibasaka へのお問い合わせフォーム。学校・教育委員会・支援員仲間からのご相談歓迎。">
+<meta name="theme-color" content="#0d111a">
+<title>Contact — ICT-shibasaka</title>
+<link rel="stylesheet" href="assets/css/main.css">
+<link rel="icon" type="image/png" href="assets/images/logo.png">
+</head>
+<body>
+
+<div class="migration-banner" role="region" aria-label="サイト移行のお知らせ">
+  ※このサイトは <strong>shibatora0827.github.io</strong> への移行版です。旧サイト（ict-shibasaka.jimdosite.com）は2026年8月に閉鎖予定。
+  <button class="migration-banner__close" aria-label="閉じる" type="button">&times;</button>
+</div>
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href="index.html">
+      <span class="brand__mark">IC</span>
+      <span>ICT-shibasaka</span>
+    </a>
+    <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false" type="button">≡ Menu</button>
+    <nav class="nav" aria-label="サイトナビゲーション">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="tools.html">Tools</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero" style="padding:90px 0 60px;">
+    <div class="container hero__inner">
+      <h1>Contact — お問い合わせ</h1>
+      <p class="hero__lead">ご相談・お見積もり・取材依頼など、お気軽にどうぞ。原則3営業日以内に返信します。</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+
+      <!--
+        Formspree フォーム
+        TODO: 下記 action の "your-form-id" を、Formspree（https://formspree.io）で取得した
+        フォームIDに置き換えてください（無料プラン: 50通/月）。
+      -->
+      <form class="contact-form"
+            action="https://formspree.io/f/your-form-id"
+            method="POST"
+            novalidate>
+
+        <div>
+          <label for="name">お名前 <span style="color:#f6a623;">*</span></label>
+          <input id="name" name="name" type="text" required placeholder="例）山田 太郎">
+        </div>
+
+        <div>
+          <label for="email">メールアドレス <span style="color:#f6a623;">*</span></label>
+          <input id="email" name="email" type="email" required placeholder="例）example@example.com">
+        </div>
+
+        <div>
+          <label for="message">メッセージ <span style="color:#f6a623;">*</span></label>
+          <textarea id="message" name="message" required placeholder="ご相談内容をご記入ください。"></textarea>
+        </div>
+
+        <!-- Spam protection -->
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+
+        <button type="submit" class="btn btn--primary">送信する</button>
+      </form>
+
+      <div class="contact-alt">
+        <p>フォームが使えないときは、各SNSのDMからもどうぞ。</p>
+        <p style="margin-top:6px;">
+          <a href="https://x.com/sibatora0827" target="_blank" rel="noopener">X（@sibatora0827）</a>
+          ／
+          <a href="https://instagram.com/shiba_ict_support" target="_blank" rel="noopener">Instagram（@shiba_ict_support）</a>
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="social" aria-label="SNSリンク">
+      <a href="https://shibaebi.booth.pm/" target="_blank" rel="noopener" aria-label="BOOTH（シバエビ屋）" title="BOOTH">B</a>
+      <!-- TODO: URL設定 -->
+      <a href="#" aria-label="BASE" title="BASE">b</a>
+      <a href="https://instagram.com/shiba_ict_support" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">IG</a>
+      <a href="https://x.com/sibatora0827" target="_blank" rel="noopener" aria-label="X（旧Twitter）" title="X">X</a>
+      <!-- TODO: URL設定 -->
+      <a href="#" aria-label="note" title="note">n</a>
+      <!-- TODO: URL設定 -->
+      <a href="#" aria-label="メルカリ" title="メルカリ">M</a>
+      <a href="https://www.youtube.com/channel/UCU5ggiWpP4ydXI0qMTpCrCA" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube">YT</a>
+    </div>
+    <p class="copy">&copy; 2026 ICT-shibasaka / 芝坂政則（シバトラ）. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+/* =========================================================
+   tools.css — ツール集ページ専用スタイル
+   ========================================================= */
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+  margin-top: 30px;
+}
+
+.tool-card {
+  background: linear-gradient(180deg, #1a1f2e 0%, #161b27 100%);
+  border: 1px solid #232a3a;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.tool-card:hover {
+  transform: translateY(-4px);
+  border-color: #f6a623;
+  box-shadow: 0 14px 34px rgba(0,0,0,.42);
+}
+
+.tool-card__thumb {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #1f2533;
+  display: block;
+}
+.tool-card__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.tool-card__body {
+  padding: 18px 20px 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.tool-card__title {
+  font-size: 1.05rem;
+  color: #f1f3f8;
+  margin: 0 0 .35em;
+  font-weight: 700;
+}
+.tool-card__desc {
+  font-size: .9rem;
+  color: #b8bfd0;
+  flex: 1;
+  margin: 0 0 16px;
+  line-height: 1.6;
+}
+.tool-card__cta {
+  display: inline-block;
+  align-self: flex-start;
+  background: #f6a623;
+  color: #0d111a;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: .85rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  transition: background .2s ease, transform .15s ease;
+}
+.tool-card__cta:hover {
+  background: #ffc56b;
+  transform: translateY(-1px);
+}
+
+/* Software section */
+.software-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 22px;
+  margin-top: 26px;
+}
+.software-item {
+  background: #131826;
+  border: 1px solid #232a3a;
+  border-radius: 12px;
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+}
+.software-item h3 {
+  color: #f1f3f8;
+  margin: 0 0 .35em;
+  font-size: 1.1rem;
+}
+.software-item p {
+  color: #b8bfd0;
+  font-size: .92rem;
+  flex: 1;
+}
+.software-item .badge {
+  display: inline-block;
+  background: rgba(96,165,250,.15);
+  color: #60a5fa;
+  font-size: .75rem;
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-left: 8px;
+  vertical-align: middle;
+  letter-spacing: .04em;
+}
+.software-item .badge--coming {
+  background: rgba(170,170,170,.12);
+  color: #c9cdd8;
+}
