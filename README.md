@@ -1,6 +1,6 @@
 # shibatora0827.github.io
 
-芝坂政則（シバトラ）の個人HP — **ICT-shibasaka** の公式サイト（GitHub Pages版）。
+芝坂政則の個人HP — **ICT-shibasaka** の公式サイト（GitHub Pages版）。
 
 旧サイト Jimdo Free (`ict-shibasaka.jimdosite.com`) からの完全移行版です。
 
