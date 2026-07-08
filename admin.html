@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>shibasaka Admin｜HP管理ツール</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@500&family=Zen+Kaku+Gothic+New:wght@400;500&family=Cormorant+Garamond:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #FAF7F0;
+  --paper-2: #F3EFE4;
+  --ink: #2A2825;
+  --ink-mid: #6B665D;
+  --ink-light: #A39F94;
+  --line: #D5CFC1;
+  --c1: #C88B65;
+  --c2: #7FA88C;
+  --c3: #7593B3;
+  --c4: #B88AA8;
+  --c5: #D9B267;
+  --danger: #B85A3C;
+  --shadow: 0 4px 20px rgba(42, 40, 37, 0.08);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Zen Kaku Gothic New', -apple-system, sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+.mincho { font-family: 'Zen Old Mincho', serif; }
+.eng { font-family: 'Cormorant Garamond', serif; letter-spacing: 0.15em; }
+
+/* ============ Header ============ */
+header {
+  background: white;
+  padding: 20px 32px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky; top: 0; z-index: 20;
+}
+header .logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  color: var(--ink);
+}
+header .logo .accent { color: var(--c1); font-size: 14px; letter-spacing: 0.3em; margin-left: 8px; }
+
+/* ============ Tabs ============ */
+.tabs {
+  display: flex;
+  gap: 4px;
+  padding: 0 32px;
+  background: white;
+  border-bottom: 1px solid var(--line);
+}
+.tab-btn {
+  background: transparent;
+  border: none;
+  padding: 14px 24px;
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 14px;
+  letter-spacing: 0.15em;
+  color: var(--ink-mid);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
+}
+.tab-btn:hover { color: var(--ink); background: var(--paper); }
+.tab-btn.active {
+  color: var(--ink);
+  border-bottom-color: var(--c1);
+  font-weight: 500;
+}
+
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px;
+}
+
+.panel { display: none; }
+.panel.active { display: block; }
+
+/* ============ Card ============ */
+.card {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow);
+}
+.card h2 {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 18px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.card h2 .badge {
+  background: var(--c1);
+  color: white;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+/* ============ Form ============ */
+.form-row {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.form-row.two { grid-template-columns: 1fr 1fr; }
+.form-row.three { grid-template-columns: auto auto 1fr; }
+.form-row label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--ink-mid);
+}
+.form-row input,
+.form-row select,
+.form-row textarea {
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--ink);
+  transition: border-color 0.2s;
+}
+.form-row input:focus,
+.form-row select:focus,
+.form-row textarea:focus {
+  outline: none;
+  border-color: var(--c2);
+  background: white;
+}
+.form-row textarea { min-height: 80px; resize: vertical; }
+
+.btn {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 999px;
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-primary { background: var(--ink); color: var(--paper); }
+.btn-primary:hover { background: var(--c1); transform: translateY(-2px); }
+.btn-outline { background: transparent; border: 1px solid var(--line); color: var(--ink); }
+.btn-outline:hover { background: var(--paper-2); }
+.btn-danger { background: transparent; color: var(--danger); border: 1px solid var(--danger); font-size: 11px; padding: 4px 12px; }
+.btn-danger:hover { background: var(--danger); color: white; }
+
+.form-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 8px; }
+
+/* ============ List ============ */
+.item-list { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.item {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 13px;
+}
+.item-body { flex: 1; min-width: 0; }
+.item-meta {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 4px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--ink-light);
+}
+.item-meta .platform {
+  padding: 2px 8px;
+  border-radius: 999px;
+  color: white;
+  font-weight: 500;
+}
+.platform.NOTE { background: var(--c2); }
+.platform.X { background: var(--c3); }
+.platform.IG { background: var(--c4); }
+.item-title { font-family: 'Zen Old Mincho', serif; font-size: 14px; font-weight: 500; }
+.item-text { color: var(--ink); word-break: break-word; }
+.item-excerpt { color: var(--ink-mid); font-size: 12px; margin-top: 4px; line-height: 1.7; }
+.item-actions { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; white-space: nowrap; }
+
+.empty-msg {
+  padding: 24px;
+  text-align: center;
+  color: var(--ink-light);
+  font-size: 12px;
+  background: var(--paper);
+  border-radius: 10px;
+  border: 1px dashed var(--line);
+}
+
+/* ============ Output panel ============ */
+.output-box {
+  background: #1e1e1e;
+  color: #d4d4d4;
+  padding: 16px;
+  border-radius: 8px;
+  font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-all;
+  max-height: 320px;
+  overflow-y: auto;
+  border: 1px solid var(--line);
+}
+.output-actions { display: flex; gap: 10px; margin-top: 10px; }
+
+.help-note {
+  background: var(--paper-2);
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 12px;
+  color: var(--ink-mid);
+  border-left: 3px solid var(--c5);
+  margin-top: 12px;
+  line-height: 1.9;
+}
+
+/* Backup section */
+.backup-actions {
+  display: flex; gap: 10px; flex-wrap: wrap;
+  padding: 20px 0 8px;
+}
+.import-hint { font-size: 12px; color: var(--ink-light); margin-top: 8px; }
+
+/* ============ Toast ============ */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ink);
+  color: var(--paper);
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  z-index: 30;
+}
+.toast.show { opacity: 1; }
+
+/* ============ Responsive ============ */
+@media (max-width: 700px) {
+  header, .tabs, main { padding-left: 16px; padding-right: 16px; }
+  .form-row.two, .form-row.three { grid-template-columns: 1fr; }
+  .tab-btn { padding: 12px 14px; font-size: 12px; }
+  .card { padding: 18px; }
+  .item { flex-direction: column; }
+  .item-actions { flex-direction: row; align-self: flex-end; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">shibasaka<span class="accent">ADMIN</span></div>
+  <span class="eng" style="font-size: 11px; color: var(--ink-mid);">MANAGE HP CONTENT</span>
+</header>
+
+<nav class="tabs">
+  <button class="tab-btn active" data-tab="news">NEWS</button>
+  <button class="tab-btn" data-tab="blog">BLOG</button>
+  <button class="tab-btn" data-tab="output">HTML出力</button>
+  <button class="tab-btn" data-tab="backup">バックアップ</button>
+</nav>
+
+<main>
+
+<!-- ============ NEWS ============ -->
+<section class="panel active" id="panel-news">
+  <div class="card">
+    <h2>NEWS を追加 <span class="badge">SNS UPDATE</span></h2>
+    <form id="newsForm">
+      <div class="form-row three">
+        <div>
+          <label>DATE</label>
+          <input type="date" name="date" id="newsDate" required>
+        </div>
+        <div>
+          <label>PLATFORM</label>
+          <select name="platform" id="newsPlatform">
+            <option value="NOTE">NOTE</option>
+            <option value="X">X</option>
+            <option value="IG">IG</option>
+          </select>
+        </div>
+        <div>
+          <label>TEXT</label>
+          <input type="text" name="text" id="newsText" placeholder="更新内容のタイトル" required>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">追加</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="card">
+    <h2>登録済み NEWS <span class="badge" id="newsCount">0</span></h2>
+    <div class="item-list" id="newsList"></div>
+  </div>
+</section>
+
+<!-- ============ BLOG ============ -->
+<section class="panel" id="panel-blog">
+  <div class="card">
+    <h2>BLOG 記事を追加 <span class="badge">ARTICLE</span></h2>
+    <form id="blogForm">
+      <div class="form-row">
+        <label>TITLE</label>
+        <input type="text" name="title" id="blogTitle" placeholder="記事のタイトル" required>
+      </div>
+      <div class="form-row">
+        <label>EXCERPT（抜粋・冒頭文）</label>
+        <textarea name="excerpt" id="blogExcerpt" placeholder="1〜2文の要約" required></textarea>
+      </div>
+      <div class="form-row two">
+        <div>
+          <label>DATE</label>
+          <input type="date" name="date" id="blogDate" required>
+        </div>
+        <div>
+          <label>COLOR</label>
+          <select name="color" id="blogColor">
+            <option value="c5">ゴールド</option>
+            <option value="c2">グリーン</option>
+            <option value="c1">コーラル</option>
+            <option value="c3">ブルー</option>
+            <option value="c4">パープル</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">追加</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="card">
+    <h2>登録済み BLOG <span class="badge" id="blogCount">0</span></h2>
+    <div class="item-list" id="blogList"></div>
+  </div>
+</section>
+
+<!-- ============ OUTPUT ============ -->
+<section class="panel" id="panel-output">
+  <div class="card">
+    <h2>NEWS の HTML コード <span class="badge">COPY & PASTE</span></h2>
+    <div class="output-box" id="newsOutput">（NEWS を1件以上追加すると、ここにコードが表示されます）</div>
+    <div class="output-actions">
+      <button class="btn btn-primary" data-copy="newsOutput">クリップボードにコピー</button>
+      <button class="btn btn-outline" data-refresh="news">再生成</button>
+    </div>
+    <div class="help-note">
+      <strong>使い方：</strong><br>
+      1. 「クリップボードにコピー」を押す<br>
+      2. `index.html` をテキストエディタで開く<br>
+      3. <code>&lt;div class="news-list"&gt;</code> 〜 <code>&lt;/div&gt;</code> の中身を、コピーしたコードで置き換え<br>
+      4. 保存 → git add . && git commit && git push
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>BLOG の HTML コード <span class="badge">COPY & PASTE</span></h2>
+    <div class="output-box" id="blogOutput">（BLOG を1件以上追加すると、ここにコードが表示されます）</div>
+    <div class="output-actions">
+      <button class="btn btn-primary" data-copy="blogOutput">クリップボードにコピー</button>
+      <button class="btn btn-outline" data-refresh="blog">再生成</button>
+    </div>
+    <div class="help-note">
+      <strong>使い方：</strong><br>
+      1. 「クリップボードにコピー」を押す<br>
+      2. `index.html` をテキストエディタで開く<br>
+      3. <code>&lt;div class="blog-list"&gt;</code> 〜 <code>&lt;/div&gt;</code> の中身を、コピーしたコードで置き換え<br>
+      4. 保存 → git add . && git commit && git push
+    </div>
+  </div>
+</section>
+
+<!-- ============ BACKUP ============ -->
+<section class="panel" id="panel-backup">
+  <div class="card">
+    <h2>データのバックアップ <span class="badge">JSON</span></h2>
+    <p style="font-size: 13px; color: var(--ink-mid); line-height: 1.9;">
+      入力データはブラウザ内（LocalStorage）に自動保存されています。<br>
+      別のブラウザ・端末に移す時、或いは万が一に備えて、JSON でバックアップを取っておくと安心です。
+    </p>
+    <div class="backup-actions">
+      <button class="btn btn-primary" id="btnExportJson">JSON でエクスポート</button>
+      <button class="btn btn-outline" id="btnImportJson">JSON からインポート</button>
+      <input type="file" id="importFile" accept=".json" style="display: none;">
+    </div>
+    <p class="import-hint">エクスポートすると、`shibasaka_admin_backup_YYYY-MM-DD.json` としてダウンロードされます。</p>
+  </div>
+
+  <div class="card">
+    <h2>データを全消去 <span class="badge" style="background: var(--danger);">DANGER</span></h2>
+    <p style="font-size: 13px; color: var(--ink-mid); margin-bottom: 12px;">
+      NEWS と BLOG のデータを全て消します。この操作は元に戻せません。
+    </p>
+    <button class="btn btn-outline" id="btnClearAll" style="border-color: var(--danger); color: var(--danger);">全データを消去</button>
+  </div>
+</section>
+
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ============ Data layer ============
+const STORAGE_KEY = 'shibasaka_admin_data';
+
+function loadData() {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (!raw) return { news: [], blog: [] };
+  try {
+    const d = JSON.parse(raw);
+    return { news: d.news || [], blog: d.blog || [] };
+  } catch { return { news: [], blog: [] }; }
+}
+
+function saveData(data) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+
+let data = loadData();
+
+// ============ Toast ============
+const toast = document.getElementById('toast');
+function showToast(msg) {
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(showToast.tm);
+  showToast.tm = setTimeout(() => toast.classList.remove('show'), 1800);
+}
+
+// ============ Tab switching ============
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+    if (btn.dataset.tab === 'output') refreshOutputs();
+  });
+});
+
+// ============ Utils ============
+function formatDate(iso) {
+  if (!iso) return '';
+  return iso.replaceAll('-', '.');
+}
+function escapeHtml(str) {
+  return String(str)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;');
+}
+function todayIso() {
+  const d = new Date();
+  return d.toISOString().slice(0, 10);
+}
+
+// ============ NEWS ============
+const newsForm = document.getElementById('newsForm');
+const newsList = document.getElementById('newsList');
+const newsCount = document.getElementById('newsCount');
+const newsDate = document.getElementById('newsDate');
+
+newsDate.value = todayIso();
+
+newsForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const item = {
+    id: Date.now() + '_' + Math.random().toString(36).slice(2, 7),
+    date: document.getElementById('newsDate').value,
+    platform: document.getElementById('newsPlatform').value,
+    text: document.getElementById('newsText').value.trim()
+  };
+  if (!item.date || !item.text) return;
+  data.news.push(item);
+  data.news.sort((a, b) => b.date.localeCompare(a.date));
+  saveData(data);
+  renderNews();
+  newsForm.reset();
+  newsDate.value = todayIso();
+  showToast('NEWS を追加しました');
+});
+
+function renderNews() {
+  newsCount.textContent = data.news.length;
+  if (data.news.length === 0) {
+    newsList.innerHTML = '<div class="empty-msg">まだ NEWS がありません</div>';
+    return;
+  }
+  newsList.innerHTML = data.news.map(item => `
+    <div class="item">
+      <div class="item-body">
+        <div class="item-meta">
+          <span>${formatDate(item.date)}</span>
+          <span class="platform ${item.platform}">${item.platform}</span>
+        </div>
+        <div class="item-text">${escapeHtml(item.text)}</div>
+      </div>
+      <div class="item-actions">
+        <button class="btn btn-danger" data-delete-news="${item.id}">削除</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+newsList.addEventListener('click', e => {
+  const id = e.target.dataset.deleteNews;
+  if (id && confirm('この NEWS を削除しますか？')) {
+    data.news = data.news.filter(x => x.id !== id);
+    saveData(data);
+    renderNews();
+    showToast('削除しました');
+  }
+});
+
+// ============ BLOG ============
+const blogForm = document.getElementById('blogForm');
+const blogList = document.getElementById('blogList');
+const blogCount = document.getElementById('blogCount');
+const blogDate = document.getElementById('blogDate');
+
+blogDate.value = todayIso();
+
+blogForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const item = {
+    id: Date.now() + '_' + Math.random().toString(36).slice(2, 7),
+    date: document.getElementById('blogDate').value,
+    title: document.getElementById('blogTitle').value.trim(),
+    excerpt: document.getElementById('blogExcerpt').value.trim(),
+    color: document.getElementById('blogColor').value
+  };
+  if (!item.date || !item.title || !item.excerpt) return;
+  data.blog.push(item);
+  data.blog.sort((a, b) => b.date.localeCompare(a.date));
+  saveData(data);
+  renderBlog();
+  blogForm.reset();
+  blogDate.value = todayIso();
+  showToast('BLOG 記事を追加しました');
+});
+
+function renderBlog() {
+  blogCount.textContent = data.blog.length;
+  if (data.blog.length === 0) {
+    blogList.innerHTML = '<div class="empty-msg">まだ BLOG 記事がありません</div>';
+    return;
+  }
+  const colorLabel = { c1: 'コーラル', c2: 'グリーン', c3: 'ブルー', c4: 'パープル', c5: 'ゴールド' };
+  blogList.innerHTML = data.blog.map(item => `
+    <div class="item">
+      <div class="item-body">
+        <div class="item-meta">
+          <span>${formatDate(item.date)}</span>
+          <span>■ ${colorLabel[item.color] || 'ゴールド'}</span>
+        </div>
+        <div class="item-title">${escapeHtml(item.title)}</div>
+        <div class="item-excerpt">${escapeHtml(item.excerpt)}</div>
+      </div>
+      <div class="item-actions">
+        <button class="btn btn-danger" data-delete-blog="${item.id}">削除</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+blogList.addEventListener('click', e => {
+  const id = e.target.dataset.deleteBlog;
+  if (id && confirm('この BLOG 記事を削除しますか？')) {
+    data.blog = data.blog.filter(x => x.id !== id);
+    saveData(data);
+    renderBlog();
+    showToast('削除しました');
+  }
+});
+
+// ============ HTML Output ============
+function generateNewsHtml() {
+  if (data.news.length === 0) return '（NEWS を1件以上追加すると、ここにコードが表示されます）';
+  return data.news.map(item => `    <div class="news-row">
+      <time>${formatDate(item.date)}</time>
+      <span class="platform ${item.platform.toLowerCase()}">${item.platform}</span>
+      <span class="text">${escapeHtml(item.text)}</span>
+    </div>`).join('\n');
+}
+
+function generateBlogHtml() {
+  if (data.blog.length === 0) return '（BLOG を1件以上追加すると、ここにコードが表示されます）';
+  return data.blog.map(item => `    <article class="blog-item" style="border-left-color: var(--${item.color});">
+      <div>
+        <h3 class="blog-title">${escapeHtml(item.title)}</h3>
+        <p class="blog-excerpt">${escapeHtml(item.excerpt)}</p>
+      </div>
+      <time class="blog-date">${formatDate(item.date)}</time>
+    </article>`).join('\n');
+}
+
+function refreshOutputs() {
+  document.getElementById('newsOutput').textContent = generateNewsHtml();
+  document.getElementById('blogOutput').textContent = generateBlogHtml();
+}
+
+// コピー・再生成ボタン
+document.body.addEventListener('click', e => {
+  const copyTarget = e.target.dataset.copy;
+  if (copyTarget) {
+    const text = document.getElementById(copyTarget).textContent;
+    navigator.clipboard.writeText(text).then(
+      () => showToast('コピーしました'),
+      () => showToast('コピー失敗、手動で選択してください')
+    );
+  }
+  const refreshType = e.target.dataset.refresh;
+  if (refreshType) {
+    refreshOutputs();
+    showToast('再生成しました');
+  }
+});
+
+// ============ Backup ============
+document.getElementById('btnExportJson').addEventListener('click', () => {
+  const json = JSON.stringify(data, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `shibasaka_admin_backup_${todayIso()}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('バックアップをエクスポートしました');
+});
+
+const importFile = document.getElementById('importFile');
+document.getElementById('btnImportJson').addEventListener('click', () => importFile.click());
+importFile.addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      const imported = JSON.parse(ev.target.result);
+      if (!imported.news || !imported.blog) throw new Error('形式エラー');
+      if (!confirm(`NEWS ${imported.news.length}件、BLOG ${imported.blog.length}件をインポートします。既存データは上書きされます。`)) return;
+      data = { news: imported.news, blog: imported.blog };
+      saveData(data);
+      renderNews();
+      renderBlog();
+      showToast('インポート完了');
+    } catch (err) {
+      alert('JSON の読み込みに失敗しました：' + err.message);
+    }
+  };
+  reader.readAsText(file);
+  importFile.value = '';
+});
+
+document.getElementById('btnClearAll').addEventListener('click', () => {
+  if (!confirm('本当に全データを消去しますか？この操作は元に戻せません。')) return;
+  if (!confirm('もう一度確認します。NEWS と BLOG のデータを全て消します。よろしいですか？')) return;
+  data = { news: [], blog: [] };
+  saveData(data);
+  renderNews();
+  renderBlog();
+  refreshOutputs();
+  showToast('全データを消去しました');
+});
+
+// ============ Init ============
+renderNews();
+renderBlog();
+refreshOutputs();
+</script>
+
+</body>
+</html>
