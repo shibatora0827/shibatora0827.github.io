@@ -3,123 +3,1129 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="ICT-shibasaka — 現場の困ったを、ICTで“できた！”に。ICT支援員業務、教材開発、校務DXコンサルティング。">
-<meta name="theme-color" content="#0d111a">
-<title>ICT-shibasaka — 現場の困ったを、ICTで「できた！」に。</title>
-<link rel="stylesheet" href="assets/css/main.css">
-<link rel="icon" type="image/png" href="assets/images/logo.png">
+<title>シバサカ｜楽しいと学びたいを、ICTで作る人</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@300;400;500&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #FAF7F0;
+  --paper-2: #F3EFE4;
+  --ink: #2A2825;
+  --ink-mid: #6B665D;
+  --ink-light: #A39F94;
+  --line: #D5CFC1;
+  /* アクセントカラー：5色をポイント使い */
+  --c1: #C88B65;  /* くすみコーラル（温かみ） */
+  --c2: #7FA88C;  /* くすみグリーン（自然・成長） */
+  --c3: #7593B3;  /* くすみブルー（信頼・水色） */
+  --c4: #B88AA8;  /* くすみパープル（遊び心） */
+  --c5: #D9B267;  /* くすみゴールド（品格） */
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Zen Kaku Gothic New', -apple-system, sans-serif;
+  font-weight: 300;
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 2;
+  letter-spacing: 0.04em;
+  overflow-x: hidden;
+}
+.mincho {
+  font-family: 'Zen Old Mincho', serif;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+}
+a { color: inherit; text-decoration: none; transition: opacity 0.3s; }
+a:hover { opacity: 0.7; }
+
+/* ============ Layout ============ */
+.layout {
+  display: grid;
+  grid-template-columns: 240px 1fr 50px;
+  min-height: 100vh;
+}
+
+/* ============ Sidebar (left) ============ */
+.sidebar {
+  padding: 60px 32px;
+  position: fixed;
+  top: 0; left: 0;
+  width: 240px; height: 100vh;
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  background: var(--paper);
+  z-index: 10;
+}
+.brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 40px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+  position: relative;
+  display: inline-block;
+}
+.brand::after {
+  content: "";
+  position: absolute;
+  bottom: 6px; left: 3px;
+  width: 82%; height: 6px;
+  background: var(--c1);
+  opacity: 0.4;
+  z-index: -1;
+  border-radius: 3px;
+}
+.brand-sub {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--ink-mid);
+  margin-top: 8px;
+}
+.nav-menu {
+  list-style: none;
+  display: flex; flex-direction: column;
+  gap: 22px;
+  margin-top: 80px;
+}
+.nav-menu li:nth-child(1) a::before { background: var(--c1); }
+.nav-menu li:nth-child(2) a::before { background: var(--c2); }
+.nav-menu li:nth-child(3) a::before { background: var(--c3); }
+.nav-menu li:nth-child(4) a::before { background: var(--c4); }
+.nav-menu li:nth-child(5) a::before { background: var(--c5); }
+.nav-menu li:nth-child(6) a::before { background: var(--c1); }
+.nav-menu a {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 14px;
+  color: var(--ink-mid);
+  letter-spacing: 0.2em;
+  padding-left: 0;
+  transition: padding-left 0.3s, color 0.3s;
+  position: relative;
+  display: inline-block;
+}
+.nav-menu a::before {
+  content: "";
+  position: absolute; left: -14px; top: 50%;
+  width: 7px; height: 7px; border-radius: 50%;
+  opacity: 0; transform: translateY(-50%);
+  transition: opacity 0.3s, left 0.3s;
+}
+.nav-menu a:hover, .nav-menu a.active {
+  padding-left: 16px; color: var(--ink);
+}
+.nav-menu a:hover::before, .nav-menu a.active::before {
+  opacity: 1; left: 0;
+}
+.sns-list {
+  list-style: none;
+  display: flex; flex-direction: column;
+  gap: 12px;
+}
+.sns-list li:nth-child(1) a { border-left-color: var(--c1); }
+.sns-list li:nth-child(2) a { border-left-color: var(--c2); }
+.sns-list li:nth-child(3) a { border-left-color: var(--c3); }
+.sns-list li:nth-child(4) a { border-left-color: var(--c4); }
+.sns-list a {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--ink-mid);
+  padding-left: 12px;
+  border-left: 2px solid;
+  display: flex; align-items: center; gap: 6px;
+}
+.sns-list a::after {
+  content: "↗";
+  font-size: 10px; opacity: 0.5;
+}
+
+/* ============ Right vertical text ============ */
+.side-tag {
+  position: fixed;
+  top: 0; right: 0;
+  width: 50px; height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  writing-mode: vertical-rl;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  letter-spacing: 0.5em;
+  color: var(--ink-mid);
+  z-index: 5;
+}
+.side-tag span { color: var(--c2); }
+
+/* ============ Main content ============ */
+main {
+  grid-column: 2;
+  padding: 80px 20px 120px;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Arch container */
+.arch {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 400px 400px 20px 20px;
+  padding: 100px 60px 80px;
+  margin-bottom: 100px;
+  position: relative;
+  overflow: hidden;
+}
+.arch::before {
+  content: "";
+  position: absolute;
+  top: 30px; right: 30px;
+  width: 60px; height: 60px;
+  background: var(--c2);
+  border-radius: 50%;
+  opacity: 0.15;
+}
+.arch::after {
+  content: "";
+  position: absolute;
+  bottom: 40px; left: 30px;
+  width: 40px; height: 40px;
+  background: var(--c1);
+  border-radius: 50%;
+  opacity: 0.2;
+}
+.arch-label {
+  writing-mode: vertical-rl;
+  position: absolute;
+  top: 60px; left: 40px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  letter-spacing: 0.5em;
+  color: var(--ink-light);
+  z-index: 2;
+}
+
+/* ============ Section: INTRO ============ */
+.intro { text-align: center; padding-top: 40px; position: relative; z-index: 2; }
+.intro-catch {
+  font-size: clamp(24px, 3vw, 32px);
+  line-height: 2;
+  color: var(--ink);
+  margin-bottom: 40px;
+}
+.intro-catch .h1 { color: var(--c1); position: relative; }
+.intro-catch .h2 { color: var(--c2); position: relative; }
+.intro-catch .h3 { color: var(--c3); position: relative; display: inline-block; }
+.intro-catch .h3::after {
+  content: "";
+  position: absolute;
+  bottom: 4px; left: 0; right: 0;
+  height: 10px;
+  background: var(--c3);
+  opacity: 0.2;
+  z-index: -1;
+  border-radius: 5px;
+}
+.intro-sub {
+  font-size: 13px;
+  color: var(--ink-mid);
+  margin-bottom: 60px;
+}
+
+/* 装飾ドット */
+.dots {
+  display: flex; justify-content: center; gap: 12px;
+  margin: 30px 0;
+}
+.dot {
+  width: 8px; height: 8px; border-radius: 50%;
+}
+.dot:nth-child(1) { background: var(--c1); }
+.dot:nth-child(2) { background: var(--c2); }
+.dot:nth-child(3) { background: var(--c3); }
+.dot:nth-child(4) { background: var(--c4); }
+.dot:nth-child(5) { background: var(--c5); }
+
+/* 手描き風スケッチ */
+.sketch-wrap {
+  display: flex; justify-content: center;
+  margin: 40px 0;
+}
+.sketch-wrap svg {
+  max-width: 400px; height: auto;
+}
+.sketch { stroke: var(--ink); stroke-width: 1.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.sketch-thin { stroke: var(--ink-mid); stroke-width: 1; fill: none; stroke-linecap: round; }
+
+/* ============ Section title ============ */
+.section-title {
+  writing-mode: vertical-rl;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  letter-spacing: 0.5em;
+  color: var(--ink);
+  padding: 20px 0;
+  height: 200px;
+  display: inline-block;
+  margin-bottom: 20px;
+  position: relative;
+}
+.section-title::before {
+  content: "";
+  position: absolute;
+  top: -8px; left: 50%;
+  transform: translateX(-50%);
+  width: 8px; height: 8px; border-radius: 50%;
+}
+#works .section-title::before { background: var(--c2); }
+#service .section-title::before { background: var(--c3); }
+#news .section-title::before { background: var(--c4); }
+#blog .section-title::before { background: var(--c5); }
+
+.section-lead {
+  font-size: 14px;
+  color: var(--ink-mid);
+  margin-bottom: 60px;
+  line-height: 2.2;
+}
+
+/* ============ Works (apps) — カラフルに ============ */
+.works-list {
+  display: flex; flex-direction: column;
+  gap: 40px;
+}
+.work-item {
+  display: grid;
+  grid-template-columns: 60px 1fr auto;
+  gap: 30px; align-items: center;
+  padding: 20px 24px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--paper);
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.work-item::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 5px;
+}
+.work-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(42, 40, 37, 0.08);
+}
+.work-item:nth-child(1)::before { background: var(--c1); }
+.work-item:nth-child(1):hover { border-color: var(--c1); }
+.work-item:nth-child(2)::before { background: var(--c2); }
+.work-item:nth-child(2):hover { border-color: var(--c2); }
+.work-item:nth-child(3)::before { background: var(--c3); }
+.work-item:nth-child(3):hover { border-color: var(--c3); }
+.work-item:nth-child(4)::before { background: var(--c4); }
+.work-item:nth-child(4):hover { border-color: var(--c4); }
+.work-item:nth-child(5)::before { background: var(--c5); }
+.work-item:nth-child(5):hover { border-color: var(--c5); }
+.work-item:nth-child(6)::before { background: var(--c1); }
+.work-item:nth-child(6):hover { border-color: var(--c1); }
+.work-item:nth-child(7)::before { background: var(--c2); }
+.work-item:nth-child(7):hover { border-color: var(--c2); }
+.work-item:nth-child(8)::before { background: var(--c3); }
+.work-item:nth-child(8):hover { border-color: var(--c3); }
+
+.work-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  color: var(--ink-light);
+  letter-spacing: 0.2em;
+}
+.work-body h3 {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 19px;
+  font-weight: 500;
+  margin-bottom: 4px;
+  letter-spacing: 0.08em;
+}
+.work-body p {
+  font-size: 12.5px;
+  color: var(--ink-mid);
+  line-height: 1.85;
+}
+.work-tag {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--ink);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-weight: 500;
+}
+.work-item:nth-child(1) .work-tag { background: rgba(200, 139, 101, 0.12); }
+.work-item:nth-child(2) .work-tag { background: rgba(127, 168, 140, 0.15); }
+.work-item:nth-child(3) .work-tag { background: rgba(117, 147, 179, 0.15); }
+.work-item:nth-child(4) .work-tag { background: rgba(184, 138, 168, 0.15); }
+.work-item:nth-child(5) .work-tag { background: rgba(217, 178, 103, 0.18); }
+.work-item:nth-child(6) .work-tag { background: rgba(200, 139, 101, 0.12); }
+.work-item:nth-child(7) .work-tag { background: rgba(127, 168, 140, 0.15); }
+.work-item:nth-child(8) .work-tag { background: rgba(117, 147, 179, 0.15); }
+
+/* ============ Service ============ */
+.service-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+.service-item {
+  padding: 24px 26px;
+  border-radius: 14px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 90px 1fr auto;
+  gap: 24px; align-items: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.service-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(42, 40, 37, 0.06);
+}
+.service-cat {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  text-align: center;
+}
+.service-item:nth-child(1) .service-cat { background: var(--c1); color: white; }
+.service-item:nth-child(2) .service-cat { background: var(--c2); color: white; }
+.service-item:nth-child(3) .service-cat { background: var(--c4); color: white; }
+.service-item:nth-child(4) .service-cat { background: var(--c5); color: white; }
+.service-title {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.service-desc {
+  font-size: 12.5px;
+  color: var(--ink-mid);
+}
+.service-arrow {
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--ink-mid);
+  font-size: 18px;
+}
+
+/* ============ About ============ */
+.about-avatar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 2;
+}
+.about-avatar-frame {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--paper-2);
+  border: 3px solid var(--paper);
+  box-shadow: 0 6px 24px rgba(42, 40, 37, 0.12);
+  position: relative;
+}
+.about-avatar-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid var(--c1);
+  opacity: 0.35;
+  pointer-events: none;
+}
+.about-avatar-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 12px;
+  display: block;
+}
+@media (max-width: 900px) {
+  .about-avatar-frame { width: 160px; height: 160px; }
+}
+.about-text {
+  font-size: 14px;
+  line-height: 2.2;
+  color: var(--ink);
+  max-width: 640px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+.about-text p { margin-bottom: 24px; }
+.about-text .highlight {
+  background: linear-gradient(180deg, transparent 65%, rgba(127, 168, 140, 0.25) 65%);
+  padding: 0 2px;
+}
+.about-sign {
+  text-align: right;
+  margin-top: 40px;
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 14px;
+  letter-spacing: 0.2em;
+  color: var(--c1);
+}
+
+/* ============ News ============ */
+.news-list {
+  display: flex; flex-direction: column;
+  gap: 14px;
+}
+.news-row {
+  display: grid;
+  grid-template-columns: 90px 70px 1fr;
+  gap: 20px;
+  padding: 16px 20px;
+  background: var(--paper);
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  font-size: 13px;
+  align-items: center;
+  transition: transform 0.2s;
+}
+.news-row:hover { transform: translateX(6px); }
+.news-row time {
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--ink-light);
+}
+.news-row .platform {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  text-align: center;
+  color: white;
+  font-weight: 500;
+}
+.platform.note { background: var(--c2); }
+.platform.x { background: var(--c3); }
+.platform.ig { background: var(--c4); }
+.news-row .text { color: var(--ink); }
+
+/* ============ Blog ============ */
+.blog-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+.blog-item {
+  padding: 24px 28px;
+  background: var(--paper);
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  border-left: 4px solid;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 30px;
+  align-items: baseline;
+  transition: transform 0.3s;
+}
+.blog-item:hover { transform: translateY(-2px); }
+.blog-item:nth-child(1) { border-left-color: var(--c5); }
+.blog-item:nth-child(2) { border-left-color: var(--c2); }
+.blog-item:nth-child(3) { border-left-color: var(--c1); }
+.blog-title {
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 17px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  letter-spacing: 0.05em;
+}
+.blog-excerpt {
+  font-size: 13px;
+  color: var(--ink-mid);
+  line-height: 1.9;
+}
+.blog-date {
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--ink-light);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* ============ Contact form ============ */
+.contact-arch {
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: 300px 300px 20px 20px;
+  padding: 100px 60px 60px;
+  margin-top: 60px;
+  position: relative;
+  overflow: hidden;
+}
+.contact-arch::before {
+  content: "";
+  position: absolute;
+  top: 40px; right: 60px;
+  width: 30px; height: 30px;
+  background: var(--c4);
+  border-radius: 50%;
+  opacity: 0.25;
+}
+.contact-arch::after {
+  content: "";
+  position: absolute;
+  bottom: 30px; left: 50px;
+  width: 20px; height: 20px;
+  background: var(--c5);
+  border-radius: 50%;
+  opacity: 0.3;
+}
+form { max-width: 500px; margin: 0 auto; position: relative; z-index: 2; }
+.form-row { margin-bottom: 24px; }
+.form-row label {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--ink-mid);
+  margin-bottom: 8px;
+}
+.form-row input,
+.form-row select,
+.form-row textarea {
+  width: 100%;
+  padding: 12px 0;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--ink);
+  letter-spacing: 0.05em;
+  transition: border-color 0.3s;
+}
+.form-row input:focus,
+.form-row select:focus,
+.form-row textarea:focus {
+  outline: none;
+  border-bottom-color: var(--c2);
+}
+.form-row textarea { resize: vertical; min-height: 100px; }
+.form-note {
+  font-size: 11px;
+  color: var(--ink-light);
+  text-align: center;
+  margin: 30px 0 20px;
+  line-height: 1.9;
+}
+.btn-submit {
+  display: block;
+  margin: 0 auto;
+  padding: 14px 60px;
+  background: var(--ink);
+  color: var(--paper);
+  border: none;
+  border-radius: 999px;
+  font-family: 'Zen Old Mincho', serif;
+  font-size: 13px;
+  letter-spacing: 0.4em;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+.btn-submit:hover { background: var(--c1); transform: translateY(-2px); }
+
+/* ============ Footer ============ */
+footer {
+  padding: 60px 0 40px;
+  text-align: center;
+  border-top: 1px solid var(--line);
+  margin-top: 120px;
+  position: relative;
+}
+.footer-copy {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--ink-light);
+}
+.footer-dots {
+  display: flex; justify-content: center; gap: 8px;
+  margin-bottom: 20px;
+}
+.footer-dots .dot { width: 6px; height: 6px; }
+
+/* ============ Responsive ============ */
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+  .sidebar {
+    position: relative;
+    width: 100%; height: auto;
+    padding: 30px 24px;
+    display: block;
+  }
+  .brand { font-size: 32px; text-align: center; display: block; }
+  .brand-sub { text-align: center; }
+  .nav-menu {
+    flex-direction: row; flex-wrap: wrap;
+    justify-content: center; margin-top: 24px;
+    gap: 16px;
+  }
+  .sns-list {
+    flex-direction: row; justify-content: center;
+    margin-top: 20px; gap: 16px;
+  }
+  .sns-list a { border-left: none; padding-left: 0; }
+  .side-tag { display: none; }
+  main { grid-column: 1; padding: 40px 20px; max-width: 100%; }
+  .arch, .contact-arch { padding: 60px 24px 40px; border-radius: 200px 200px 12px 12px; }
+  .arch-label { display: none; }
+  .work-item { grid-template-columns: 40px 1fr; gap: 16px; padding: 16px 20px 16px 24px; }
+  .work-tag { grid-column: 1 / -1; justify-self: start; margin-top: 4px; }
+  .service-item { grid-template-columns: 1fr; gap: 8px; }
+  .news-row { grid-template-columns: 70px 55px 1fr; gap: 10px; font-size: 12px; padding: 12px 14px; }
+}
+</style>
 </head>
 <body>
 
-<div class="migration-banner" role="region" aria-label="サイト移行のお知らせ">
-  ※このサイトは <strong>shibatora0827.github.io</strong> への移行版です。旧サイト（ict-shibasaka.jimdosite.com）は2026年8月に閉鎖予定。
-  <button class="migration-banner__close" aria-label="閉じる" type="button">&times;</button>
-</div>
+<div class="layout">
 
-<header class="site-header">
-  <div class="container site-header__inner">
-    <a class="brand" href="index.html">
-      <span class="brand__mark">IC</span>
-      <span>ICT-shibasaka</span>
-    </a>
-    <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false" type="button">≡ Menu</button>
-    <nav class="nav" aria-label="サイトナビゲーション">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="services.html">Services</a>
-      <a href="tools.html">Tools</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+<!-- LEFT SIDEBAR -->
+<aside class="sidebar">
+  <div>
+    <div class="brand">shibasaka</div>
+    <div class="brand-sub">LEARNING × ICT</div>
   </div>
-</header>
+  <nav>
+    <ul class="nav-menu">
+      <li><a href="#intro" class="active">はじめに</a></li>
+      <li><a href="#works">つくったもの</a></li>
+      <li><a href="#service">おしごと</a></li>
+      <li><a href="#about">わたしのこと</a></li>
+      <li><a href="#blog">日々のこと</a></li>
+      <li><a href="#contact">お問い合わせ</a></li>
+    </ul>
+  </nav>
+  <ul class="sns-list">
+    <li><a href="https://x.com/shibaba0827" target="_blank">X</a></li>
+    <li><a href="https://www.instagram.com/shiba_ict_support" target="_blank">INSTAGRAM</a></li>
+    <li><a href="https://note.com/shibababa0827" target="_blank">NOTE</a></li>
+    <li><a href="https://www.youtube.com/@help-ICT-Teacher" target="_blank">YOUTUBE</a></li>
+  </ul>
+</aside>
+
+<!-- RIGHT VERTICAL TAG -->
+<div class="side-tag">LEARNING <span>×</span> ICT BUILDER</div>
 
 <main>
 
-  <section class="hero">
-    <div class="container hero__inner">
-      <h1>現場の困ったを、ICTで「できた！」に。</h1>
-      <p class="hero__lead">
-        学校現場のICT支援員業務・教材開発・校務DXコンサルティングまで。<br>
-        子どもたちと先生のそばで、確かな成果を届けます。
-      </p>
-      <div class="hero__cta">
-        <a class="btn btn--primary" href="services.html">サービスを見る</a>
-        <a class="btn btn--ghost" href="contact.html">お問い合わせ</a>
-      </div>
+<!-- INTRO ARCH -->
+<section id="intro" class="arch">
+  <div class="arch-label">INTRO</div>
+  <div class="intro">
+    <div class="dots">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
     </div>
-  </section>
+    <p class="mincho intro-catch">
+      <span class="h1">楽しい</span>と<span class="h2">学びたい</span>を、<br>
+      <span class="h3">ICTで</span>作る人。
+    </p>
+    <p class="intro-sub">教育現場のちょっと困った、を、道具で解いていく。</p>
 
-  <section class="section">
-    <div class="container">
-      <div class="section-title">
-        <small>What I do</small>
-        <h2>3つのサービス</h2>
-      </div>
-
-      <div class="features">
-        <article class="card">
-          <div class="card__icon" aria-hidden="true">●</div>
-          <h3>ICT支援員業務</h3>
-          <p>各教科でのICT機器活用支援、トラブル対応、先生方への研修を、現場に常駐して行います。</p>
-        </article>
-        <article class="card">
-          <div class="card__icon" aria-hidden="true">▲</div>
-          <h3>教材開発</h3>
-          <p>特別支援教育で培った視点を活かし、子どもの「わかった！」を引き出すデジタル教材を制作します。</p>
-        </article>
-        <article class="card">
-          <div class="card__icon" aria-hidden="true">■</div>
-          <h3>校務DXコンサル</h3>
-          <p>O365・Google Workspaceなどを活用した校務効率化を、ヒアリングから運用定着まで伴走支援。</p>
-        </article>
-      </div>
+    <!-- 手描き風スケッチ：草原＋雲＋シバさん＋色付きハート/花 -->
+    <div class="sketch-wrap">
+      <svg viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg">
+        <!-- 雲 -->
+        <path class="sketch-thin" d="M60 40 q4 -12 16 -10 q6 -8 16 -4 q8 -6 16 0 q6 -2 8 4 q-2 10 -14 10 q-10 4 -22 0 q-12 4 -20 0 z"/>
+        <path class="sketch-thin" d="M280 30 q5 -10 18 -8 q6 -6 15 -2 q8 -4 15 2 q5 -1 6 6 q-4 8 -14 8 q-12 4 -22 0 q-11 4 -18 -6 z"/>
+        <!-- 鳥 -->
+        <path class="sketch-thin" d="M180 60 q6 -6 12 0 q6 -6 12 0"/>
+        <path class="sketch-thin" d="M220 45 q5 -5 10 0 q5 -5 10 0"/>
+        <!-- 太陽（色付き） -->
+        <circle cx="345" cy="55" r="14" fill="#D9B267" opacity="0.7"/>
+        <g stroke="#D9B267" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.7">
+          <line x1="345" y1="30" x2="345" y2="36"/>
+          <line x1="345" y1="74" x2="345" y2="80"/>
+          <line x1="320" y1="55" x2="326" y2="55"/>
+          <line x1="364" y1="55" x2="370" y2="55"/>
+          <line x1="327" y1="37" x2="331" y2="41"/>
+          <line x1="359" y1="69" x2="363" y2="73"/>
+          <line x1="327" y1="73" x2="331" y2="69"/>
+          <line x1="359" y1="41" x2="363" y2="37"/>
+        </g>
+        <!-- 草原の線 -->
+        <path class="sketch-thin" d="M0 200 q100 -20 200 -10 t200 20"/>
+        <!-- 草 -->
+        <g class="sketch-thin">
+          <path d="M30 215 l0 -15 m-3 -8 l3 8 l3 -8"/>
+          <path d="M55 220 l0 -12 m-4 -6 l4 6 l4 -6"/>
+          <path d="M90 217 l0 -14 m-3 -7 l3 7 l3 -7"/>
+          <path d="M330 220 l0 -12 m-3 -6 l3 6 l3 -6"/>
+          <path d="M365 214 l0 -15 m-4 -7 l4 7 l4 -7"/>
+          <path d="M255 215 l0 -12 m-3 -6 l3 6 l3 -6"/>
+        </g>
+        <!-- 花（色付き） -->
+        <g transform="translate(70,200)">
+          <line x1="0" y1="0" x2="0" y2="-16" stroke="#7FA88C" stroke-width="1.2" stroke-linecap="round"/>
+          <circle cx="0" cy="-20" r="4" fill="#C88B65" opacity="0.85"/>
+          <circle cx="-4" cy="-18" r="3" fill="#C88B65" opacity="0.6"/>
+          <circle cx="4" cy="-18" r="3" fill="#C88B65" opacity="0.6"/>
+          <circle cx="0" cy="-24" r="3" fill="#C88B65" opacity="0.6"/>
+        </g>
+        <g transform="translate(340,200)">
+          <line x1="0" y1="0" x2="0" y2="-14" stroke="#7FA88C" stroke-width="1.2" stroke-linecap="round"/>
+          <circle cx="0" cy="-18" r="4" fill="#B88AA8" opacity="0.85"/>
+          <circle cx="-4" cy="-16" r="3" fill="#B88AA8" opacity="0.6"/>
+          <circle cx="4" cy="-16" r="3" fill="#B88AA8" opacity="0.6"/>
+        </g>
+        <g transform="translate(115,210)">
+          <line x1="0" y1="0" x2="0" y2="-12" stroke="#7FA88C" stroke-width="1.2" stroke-linecap="round"/>
+          <circle cx="0" cy="-16" r="3.5" fill="#7593B3" opacity="0.8"/>
+          <circle cx="-3" cy="-14" r="2.5" fill="#7593B3" opacity="0.55"/>
+          <circle cx="3" cy="-14" r="2.5" fill="#7593B3" opacity="0.55"/>
+        </g>
+        <!-- シバさん（線画） -->
+        <g class="sketch">
+          <!-- 髪 -->
+          <path d="M186 130 q-8 -22 12 -30 q20 -8 32 6 q4 8 -2 20 z"/>
+          <!-- 顔 -->
+          <path d="M188 138 q0 22 20 24 q22 0 22 -22"/>
+          <!-- メガネ -->
+          <circle cx="200" cy="144" r="5" fill="none"/>
+          <circle cx="218" cy="144" r="5" fill="none"/>
+          <line x1="205" y1="144" x2="213" y2="144"/>
+          <!-- 口 -->
+          <path d="M204 154 q5 3 10 0" class="sketch-thin"/>
+          <!-- 体 -->
+          <path d="M180 165 q-10 20 0 30 l60 0 q10 -10 0 -30 z"/>
+          <!-- 腕 -->
+          <path d="M182 175 q-8 6 -10 14"/>
+          <path d="M240 175 q10 4 12 14"/>
+          <!-- 足 -->
+          <path d="M195 195 l-6 12 l14 0"/>
+          <path d="M225 195 l6 12 l-14 0"/>
+        </g>
+        <!-- シバさんの周りに小さなキラキラ -->
+        <g fill="none" stroke-width="1.2" stroke-linecap="round">
+          <path d="M165 130 l0 -4 m-2 2 l4 0" stroke="#D9B267"/>
+          <path d="M255 135 l0 -4 m-2 2 l4 0" stroke="#7593B3"/>
+          <path d="M175 175 l0 -4 m-2 2 l4 0" stroke="#B88AA8"/>
+        </g>
+      </svg>
     </div>
-  </section>
-
-  <section class="section section--tight" style="background:#0a0d15;">
-    <div class="container">
-      <div class="section-title">
-        <small>Highlights</small>
-        <h2>これまでの実績</h2>
-      </div>
-      <div class="highlights">
-        <div class="highlight"><strong>10年+</strong><span>教育・ICT支援関連の経験</span></div>
-        <div class="highlight"><strong>6本</strong><span>Geminiアプリ公開（教育向け）</span></div>
-        <div class="highlight"><strong>外部専門家</strong><span>特別支援学校での支援実績</span></div>
-        <div class="highlight"><strong>O365 / Google</strong><span>校務DX導入・運用支援</span></div>
-      </div>
+    <div class="dots">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="section">
-    <div class="container text-center">
-      <div class="section-title">
-        <small>Get in touch</small>
-        <h2>まずはお気軽にご相談ください</h2>
+<!-- WORKS -->
+<section id="works">
+  <span class="section-title">WORKS</span>
+  <p class="section-lead">
+    iPadだけでつくった、8本のiOSアプリ。<br>
+    特別支援教育・小学生・教員のための、小さな道具です。
+  </p>
+  <div class="works-list">
+    <div class="work-item">
+      <div class="work-num">01</div>
+      <div class="work-body">
+        <h3>かんじで GO</h3>
+        <p>縦書き明朝体の漢字読みクイズ。都道府県、私鉄駅名、生活の言葉まで13ジャンル。</p>
       </div>
-      <p style="color:#b8bfd0;max-width:560px;margin:0 auto 1.5em;">
-        ヒアリングは無料です。学校・教育委員会・支援員仲間からのご相談、歓迎しています。
-      </p>
-      <a class="btn btn--primary" href="contact.html">お問い合わせフォームへ</a>
+      <span class="work-tag">¥3,000 / SUB</span>
     </div>
-  </section>
+    <div class="work-item">
+      <div class="work-num">02</div>
+      <div class="work-body">
+        <h3>ぷかっと</h3>
+        <p>アイデアを泡で溜めるメモアプリ。ふわふわ動く直感UI。</p>
+      </div>
+      <span class="work-tag">¥2,400 / SUB</span>
+    </div>
+    <div class="work-item">
+      <div class="work-num">03</div>
+      <div class="work-body">
+        <h3>みんなでポン</h3>
+        <p>動画・音声のBPMと目印付けができる、教員向けの小さな道具。</p>
+      </div>
+      <span class="work-tag">¥800</span>
+    </div>
+    <div class="work-item">
+      <div class="work-num">04</div>
+      <div class="work-body">
+        <h3>ぴっとレジ</h3>
+        <p>POSレジ模擬。特別支援教育、家庭療育の買い物学習に。</p>
+      </div>
+      <span class="work-tag">¥800</span>
+    </div>
+    <div class="work-item">
+      <div class="work-num">05</div>
+      <div class="work-body">
+        <h3>マイ9</h3>
+        <p>1日9マスで目標を可視化。習慣を、ヒートマップで積み重ねる。</p>
+      </div>
+      <span class="work-tag">¥600</span>
+    </div>
+    <div class="work-item">
+      <div class="work-num">06</div>
+      <div class="work-body">
+        <h3>かな練習</h3>
+        <p>ひらがな五十音の発音を、音声認識で優しくサポート。</p>
+      </div>
+      <span class="work-tag">¥240</span>
+    </div>
+    <div class="work-item">
+      <div class="work-num">07</div>
+      <div class="work-body">
+        <h3>BokashiPro</h3>
+        <p>写真の顔や情報をさっとぼかす。教員必携の道具。</p>
+      </div>
+      <span class="work-tag">FREE</span>
+    </div>
+    <div class="work-item">
+      <div class="work-num">08</div>
+      <div class="work-body">
+        <h3>ぴっとペイ</h3>
+        <p>ぴっとレジのペア。電子マネーの練習に。</p>
+      </div>
+      <span class="work-tag">FREE</span>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE -->
+<section id="service" style="margin-top: 120px;">
+  <span class="section-title">SERVICE</span>
+  <p class="section-lead">
+    アプリだけではありません。<br>
+    書籍、note、教材販売、講演。学びを届ける手段を、幅広く。
+  </p>
+  <div class="service-grid">
+    <div class="service-item">
+      <span class="service-cat">BOOK</span>
+      <div>
+        <div class="service-title">『デジタルを届ける前に心を届ける』</div>
+        <div class="service-desc">ICT支援員として現場で見てきた、大切なこと。2026年出版予定。</div>
+      </div>
+      <span class="service-arrow">→</span>
+    </div>
+    <div class="service-item">
+      <span class="service-cat">NOTE</span>
+      <div>
+        <div class="service-title">教育note</div>
+        <div class="service-desc">現場でのできごと、道具の使い方、悩み。月水金 更新中。</div>
+      </div>
+      <span class="service-arrow">→</span>
+    </div>
+    <div class="service-item">
+      <span class="service-cat">SHOP</span>
+      <div>
+        <div class="service-title">教材販売（ココナラ・BASE）</div>
+        <div class="service-desc">自作教材、改造マウス、スイッチインターフェース。</div>
+      </div>
+      <span class="service-arrow">→</span>
+    </div>
+    <div class="service-item">
+      <span class="service-cat">TALK</span>
+      <div>
+        <div class="service-title">講演・執筆のご依頼</div>
+        <div class="service-desc">教育系の講演、コラム執筆、書籍への寄稿など、お気軽に。</div>
+      </div>
+      <span class="service-arrow">→</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="arch" style="margin-top: 120px;">
+  <div class="arch-label">ABOUT</div>
+  <!-- <div class="about-avatar">
+    <div class="about-avatar-frame">
+      <img src="shibasaka_avatar_v2.png" alt="シバサカ">
+    </div>
+  </div> -->
+  <!-- ↑ アバター画像を追加する時にコメント（<!-- と -->）を外す -->
+  <div class="about-text">
+    <p class="mincho" style="font-size: 18px; text-align: center; margin-bottom: 30px;">
+      「道具は、そっと寄り添うものでありたい。」
+    </p>
+    <p>
+      はじめまして、シバサカです。<span class="highlight">特別支援教育に関わるICT支援員</span>として、日々、子どもたちや先生方と現場を歩いています。
+    </p>
+    <p>
+      「学びづらさ」を感じている子どもに、道具が寄り添うだけで、ふっと肩の力が抜ける瞬間があります。その瞬間を、もっとたくさん作れたら。そんな思いで、アプリを作ったり、教材をデザインしたり、記事を書いたりしています。
+    </p>
+    <p>
+      派手なテクノロジーではなく、静かに丁寧に寄り添う道具を。<span class="highlight">楽しさが、学びたい気持ちに変わる、その小さな瞬間</span>を大切にしています。
+    </p>
+    <div class="about-sign mincho">— シバサカ</div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section id="news" style="margin-top: 120px;">
+  <span class="section-title">NEWS</span>
+  <p class="section-lead">最新の動きは、それぞれのSNSからもご覧いただけます。</p>
+  <div class="news-list">
+    <div class="news-row">
+      <time>2026.07.05</time>
+      <span class="platform note">NOTE</span>
+      <span class="text">Windowsのファイル履歴で「うっかり保存前」に戻る方法</span>
+    </div>
+    <div class="news-row">
+      <time>2026.07.03</time>
+      <span class="platform note">NOTE</span>
+      <span class="text">3Dプリンターで作った書字補助具の紹介</span>
+    </div>
+    <div class="news-row">
+      <time>2026.07.02</time>
+      <span class="platform x">X</span>
+      <span class="text">かんじでGO v2.4 リリース準備中</span>
+    </div>
+    <div class="news-row">
+      <time>2026.06.28</time>
+      <span class="platform ig">IG</span>
+      <span class="text">新しく作った教材、ハンコスイッチのプロト</span>
+    </div>
+    <div class="news-row">
+      <time>2026.06.20</time>
+      <span class="platform ig">IG</span>
+      <span class="text">3Dプリンターの造形物色々</span>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog" style="margin-top: 120px;">
+  <span class="section-title">BLOG</span>
+  <p class="section-lead">月2回のペースで、思うことを綴っています。</p>
+  <div class="blog-list">
+    <article class="blog-item">
+      <div>
+        <h3 class="blog-title">iPadだけでiOSアプリを8本作った話</h3>
+        <p class="blog-excerpt">Swift Playgroundsだけでここまで作れる時代。1週間で1本ペースの実録。</p>
+      </div>
+      <time class="blog-date">2026.07.05</time>
+    </article>
+    <article class="blog-item">
+      <div>
+        <h3 class="blog-title">ICT機器を導入する前に、必ずやること</h3>
+        <p class="blog-excerpt">ハード先行になりがちな現場で、まず子どもの姿を見ることの大切さ。</p>
+      </div>
+      <time class="blog-date">2026.06.20</time>
+    </article>
+    <article class="blog-item">
+      <div>
+        <h3 class="blog-title">3Dプリンターで作る、書字補助具の実例</h3>
+        <p class="blog-excerpt">既製品では合わない子のために、その子だけの道具を作る。設計データも公開。</p>
+      </div>
+      <time class="blog-date">2026.06.05</time>
+    </article>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-arch">
+  <div class="arch-label">CONTACT</div>
+  <p class="mincho" style="text-align: center; font-size: 22px; margin-bottom: 12px; position: relative; z-index: 2;">
+    お問い合わせ
+  </p>
+  <p style="text-align: center; font-size: 12px; color: var(--ink-mid); margin-bottom: 40px; position: relative; z-index: 2;">
+    お仕事、講演、アプリのご要望、なんでもお気軽に。
+  </p>
+  <form id="contactForm" action="https://formspree.io/f/xrewddoq" method="POST">
+    <div class="form-row">
+      <label>NAME</label>
+      <input type="text" name="name" required>
+    </div>
+    <div class="form-row">
+      <label>EMAIL</label>
+      <input type="email" name="email" required>
+    </div>
+    <div class="form-row">
+      <label>TOPIC</label>
+      <select name="topic">
+        <option>アプリについて</option>
+        <option>書籍・執筆のご依頼</option>
+        <option>講演のご依頼</option>
+        <option>教材のご購入について</option>
+        <option>その他</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label>MESSAGE</label>
+      <textarea name="message" required></textarea>
+    </div>
+    <p class="form-note">
+      送信内容は shibatora0827.index@gmail.com にお届けします。<br>
+      3営業日以内にご返信いたします。
+    </p>
+    <button type="submit" class="btn-submit">SEND</button>
+  </form>
+</section>
+
+<footer>
+  <div class="footer-dots">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+  <p class="footer-copy">© 2026 shibasaka — LEARNING × ICT</p>
+</footer>
 
 </main>
 
-<footer class="site-footer">
-  <div class="container">
-    <div class="social" aria-label="SNSリンク">
-      <a href="https://shibaba0827.base.shop/" target="_blank" rel="noopener" aria-label="BASE" title="BASE">b</a>
-      <a href="https://coconala.com/users/6069623" target="_blank" rel="noopener" aria-label="ココナラ（シバサカ）" title="ココナラ">C</a>
-      <a href="https://www.instagram.com/shiba_ict_support/?hl=ja" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">IG</a>
-      <a href="https://x.com/shibaba0827" target="_blank" rel="noopener" aria-label="X（旧Twitter）" title="X">X</a>
-      <a href="https://note.com/shibababa0827" target="_blank" rel="noopener" aria-label="note" title="note">n</a>
-      <a href="https://www.youtube.com/@help-ICT-Teacher" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube">YT</a>
-    </div>
-    <p class="copy">&copy; 2026 ICT-shibasaka / 芝坂政則. All rights reserved.</p>
-  </div>
-</footer>
+</div>
 
-<script src="assets/js/main.js"></script>
+<script>
+const menuLinks = document.querySelectorAll('.nav-menu a');
+menuLinks.forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) target.scrollIntoView({behavior: 'smooth', block: 'start'});
+    menuLinks.forEach(l => l.classList.remove('active'));
+    link.classList.add('active');
+  });
+});
+
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(sec => {
+    const top = sec.offsetTop - 150;
+    if (window.scrollY >= top) current = sec.id;
+  });
+  menuLinks.forEach(l => {
+    l.classList.remove('active');
+    if (l.getAttribute('href') === '#' + current) l.classList.add('active');
+  });
+});
+
+document.getElementById('contactForm').addEventListener('submit', e => {
+  if (e.currentTarget.action.includes('YOUR_FORM_ID')) {
+    e.preventDefault();
+    alert('デモ版です。\n本番では Formspree でフォームを作成し、フォームIDを設定してください。\n\n' +
+      Array.from(new FormData(e.target)).map(([k,v]) => k+' : '+v).join('\n'));
+  }
+});
+</script>
+
 </body>
 </html>
