@@ -347,6 +347,10 @@ main {
         <label>EXCERPT（抜粋・冒頭文）</label>
         <textarea name="excerpt" id="blogExcerpt" placeholder="1〜2文の要約" required></textarea>
       </div>
+      <div class="form-row">
+        <label>NOTE URL（記事のリンク先）</label>
+        <input type="url" name="url" id="blogUrl" placeholder="https://note.com/shibababa0827/n/xxxxx" required>
+      </div>
       <div class="form-row two">
         <div>
           <label>DATE</label>
@@ -568,9 +572,10 @@ blogForm.addEventListener('submit', e => {
     date: document.getElementById('blogDate').value,
     title: document.getElementById('blogTitle').value.trim(),
     excerpt: document.getElementById('blogExcerpt').value.trim(),
+    url: document.getElementById('blogUrl').value.trim(),
     color: document.getElementById('blogColor').value
   };
-  if (!item.date || !item.title || !item.excerpt) return;
+  if (!item.date || !item.title || !item.excerpt || !item.url) return;
   data.blog.push(item);
   data.blog.sort((a, b) => b.date.localeCompare(a.date));
   saveData(data);
@@ -596,6 +601,7 @@ function renderBlog() {
         </div>
         <div class="item-title">${escapeHtml(item.title)}</div>
         <div class="item-excerpt">${escapeHtml(item.excerpt)}</div>
+        <div class="item-excerpt" style="color: var(--c3); font-size: 11px;">🔗 ${escapeHtml(item.url)}</div>
       </div>
       <div class="item-actions">
         <button class="btn btn-danger" data-delete-blog="${item.id}">削除</button>
@@ -626,13 +632,13 @@ function generateNewsHtml() {
 
 function generateBlogHtml() {
   if (data.blog.length === 0) return '（BLOG を1件以上追加すると、ここにコードが表示されます）';
-  return data.blog.map(item => `    <article class="blog-item" style="border-left-color: var(--${item.color});">
+  return data.blog.map(item => `    <a href="${escapeHtml(item.url)}" target="_blank" rel="noopener" class="blog-item" style="border-left-color: var(--${item.color}); text-decoration: none; color: inherit;">
       <div>
         <h3 class="blog-title">${escapeHtml(item.title)}</h3>
         <p class="blog-excerpt">${escapeHtml(item.excerpt)}</p>
       </div>
       <time class="blog-date">${formatDate(item.date)}</time>
-    </article>`).join('\n');
+    </a>`).join('\n');
 }
 
 function refreshOutputs() {
