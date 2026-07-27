@@ -295,6 +295,7 @@ main {
   <button class="tab-btn" data-tab="blog">BLOG</button>
   <button class="tab-btn" data-tab="output">HTML出力</button>
   <button class="tab-btn" data-tab="backup">バックアップ</button>
+  <button class="tab-btn" data-tab="settings">設定</button>
 </nav>
 
 <main>
@@ -387,13 +388,11 @@ main {
     <div class="output-actions">
       <button class="btn btn-primary" data-copy="newsOutput">クリップボードにコピー</button>
       <button class="btn btn-outline" data-refresh="news">再生成</button>
+      <button class="btn btn-primary" id="btnPushNews" style="background: var(--c3);">🚀 HP を自動更新</button>
     </div>
     <div class="help-note">
-      <strong>使い方：</strong><br>
-      1. 「クリップボードにコピー」を押す<br>
-      2. `index.html` をテキストエディタで開く<br>
-      3. <code>&lt;div class="news-list"&gt;</code> 〜 <code>&lt;/div&gt;</code> の中身を、コピーしたコードで置き換え<br>
-      4. 保存 → git add . && git commit && git push
+      <strong>自動更新：</strong>「HP を自動更新」ボタンで、admin.html から直接 index.html を書き換え＆プッシュします（GitHub 設定が必要）。<br>
+      <strong>手動更新：</strong>コピーしたコードで <code>index.html</code> の <code>&lt;div class="news-list"&gt;</code> の中身を差し替え → git push。
     </div>
   </div>
 
@@ -403,13 +402,11 @@ main {
     <div class="output-actions">
       <button class="btn btn-primary" data-copy="blogOutput">クリップボードにコピー</button>
       <button class="btn btn-outline" data-refresh="blog">再生成</button>
+      <button class="btn btn-primary" id="btnPushBlog" style="background: var(--c3);">🚀 HP を自動更新</button>
     </div>
     <div class="help-note">
-      <strong>使い方：</strong><br>
-      1. 「クリップボードにコピー」を押す<br>
-      2. `index.html` をテキストエディタで開く<br>
-      3. <code>&lt;div class="blog-list"&gt;</code> 〜 <code>&lt;/div&gt;</code> の中身を、コピーしたコードで置き換え<br>
-      4. 保存 → git add . && git commit && git push
+      <strong>自動更新：</strong>「HP を自動更新」ボタンで、admin.html から直接 index.html を書き換え＆プッシュします（GitHub 設定が必要）。<br>
+      <strong>手動更新：</strong>コピーしたコードで <code>index.html</code> の <code>&lt;div class="blog-list"&gt;</code> の中身を差し替え → git push。
     </div>
   </div>
 </section>
@@ -436,6 +433,63 @@ main {
       NEWS と BLOG のデータを全て消します。この操作は元に戻せません。
     </p>
     <button class="btn btn-outline" id="btnClearAll" style="border-color: var(--danger); color: var(--danger);">全データを消去</button>
+  </div>
+</section>
+
+<!-- ============ SETTINGS ============ -->
+<section class="panel" id="panel-settings">
+  <div class="card">
+    <h2>GitHub 自動更新の設定 <span class="badge" style="background: var(--c3);">AUTO PUSH</span></h2>
+    <p style="font-size: 13px; color: var(--ink-mid); line-height: 1.9; margin-bottom: 20px;">
+      GitHub の Personal Access Token を設定すると、admin.html から**直接 index.html を書き換え・自動プッシュ**できるようになります。<br>
+      iPad Safari から使えば、git コマンド一切不要で HP 更新完結。
+    </p>
+
+    <div class="form-row">
+      <label>REPOSITORY（owner/repo）</label>
+      <input type="text" id="ghRepo" placeholder="shibatora0827/shibatora0827.github.io">
+    </div>
+    <div class="form-row">
+      <label>BRANCH</label>
+      <input type="text" id="ghBranch" placeholder="main" value="main">
+    </div>
+    <div class="form-row">
+      <label>PERSONAL ACCESS TOKEN</label>
+      <input type="password" id="ghToken" placeholder="ghp_... または github_pat_...">
+    </div>
+    <div style="display: flex; align-items: center; gap: 8px; margin: 12px 0; font-size: 12px; color: var(--ink-mid);">
+      <input type="checkbox" id="ghSaveLocal" checked>
+      <label for="ghSaveLocal">Token をこのブラウザに保存する（他人が使えない自分専用の端末推奨）</label>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-outline" id="btnClearGh">クリア</button>
+      <button class="btn btn-primary" id="btnSaveGh">保存</button>
+    </div>
+
+    <div class="help-note" style="margin-top: 20px;">
+      <strong>📝 Personal Access Token の発行手順：</strong><br><br>
+      1. GitHub にログイン → 右上プロフィール → <strong>Settings</strong><br>
+      2. 左メニューの一番下 <strong>Developer settings</strong><br>
+      3. <strong>Personal access tokens → Fine-grained tokens</strong><br>
+      4. <strong>Generate new token</strong> をクリック<br>
+      5. 名前：<code>shibasaka-admin</code>（任意）<br>
+      6. Expiration：<strong>90日 or 1年</strong>（好みで）<br>
+      7. Repository access：<strong>Only select repositories</strong> → <code>shibatora0827.github.io</code> を選択<br>
+      8. Permissions → Repository permissions で <strong>Contents: Read and write</strong> を設定<br>
+      9. <strong>Generate token</strong> をクリック<br>
+      10. 表示された文字列（<code>github_pat_...</code>）をコピー<br>
+      11. この画面の "PERSONAL ACCESS TOKEN" 欄に貼り付けて保存<br><br>
+      <strong>⚠️ 注意：Token は1度しか表示されません。なくしたら再発行になります。</strong>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>接続テスト <span class="badge" style="background: var(--c2);">TEST</span></h2>
+    <p style="font-size: 13px; color: var(--ink-mid); margin-bottom: 12px;">
+      設定した情報で GitHub に接続できるか確認します。index.html が読み込めれば OK。
+    </p>
+    <button class="btn btn-primary" id="btnTestConn">接続テスト実行</button>
+    <div id="testResult" style="margin-top: 12px; font-size: 12px; padding: 10px 14px; border-radius: 8px; display: none;"></div>
   </div>
 </section>
 
@@ -712,6 +766,189 @@ document.getElementById('btnClearAll').addEventListener('click', () => {
   refreshOutputs();
   showToast('全データを消去しました');
 });
+
+// ============ GitHub API 連携 ============
+const GH_KEY = 'shibasaka_admin_github';
+
+function loadGithubConfig() {
+  try { return JSON.parse(localStorage.getItem(GH_KEY) || '{}'); }
+  catch { return {}; }
+}
+function saveGithubConfig(cfg) {
+  localStorage.setItem(GH_KEY, JSON.stringify(cfg));
+}
+function clearGithubConfig() {
+  localStorage.removeItem(GH_KEY);
+}
+
+// UTF-8対応 base64 encode/decode
+function b64EncodeUnicode(str) {
+  return btoa(unescape(encodeURIComponent(str)));
+}
+function b64DecodeUnicode(str) {
+  return decodeURIComponent(escape(atob(str.replace(/\n/g, ''))));
+}
+
+async function githubGetFile(owner, repo, path, branch, token) {
+  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponent(path)}?ref=${encodeURIComponent(branch)}`;
+  const res = await fetch(url, {
+    headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github+json' }
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(`GET ${res.status}: ${err.message || 'エラー'}`);
+  }
+  const data = await res.json();
+  return { sha: data.sha, content: b64DecodeUnicode(data.content) };
+}
+
+async function githubUpdateFile(owner, repo, path, branch, token, newContent, sha, message) {
+  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponent(path)}`;
+  const body = { message, content: b64EncodeUnicode(newContent), sha, branch };
+  const res = await fetch(url, {
+    method: 'PUT',
+    headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json', 'Accept': 'application/vnd.github+json' },
+    body: JSON.stringify(body)
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(`PUT ${res.status}: ${err.message || 'エラー'}`);
+  }
+  return await res.json();
+}
+
+// index.html の指定セクションの中身を差し替え
+function replaceListSection(html, className, innerHtml) {
+  const startMarker = `<div class="${className}">`;
+  const startIdx = html.indexOf(startMarker);
+  if (startIdx === -1) throw new Error(`セクション <div class="${className}"> が見つかりません`);
+  const openEnd = startIdx + startMarker.length;
+  // 対応する閉じ </div> をネスト対応で探す
+  let depth = 1;
+  let i = openEnd;
+  const openTag = /<div[^>]*>/g;
+  const closeTag = /<\/div>/g;
+  while (depth > 0 && i < html.length) {
+    openTag.lastIndex = i;
+    closeTag.lastIndex = i;
+    const nextOpen = openTag.exec(html);
+    const nextClose = closeTag.exec(html);
+    if (!nextClose) throw new Error('閉じタグが見つかりません');
+    if (nextOpen && nextOpen.index < nextClose.index) {
+      depth++;
+      i = nextOpen.index + nextOpen[0].length;
+    } else {
+      depth--;
+      if (depth === 0) {
+        return html.substring(0, openEnd) + '\n' + innerHtml + '\n  ' + html.substring(nextClose.index);
+      }
+      i = nextClose.index + nextClose[0].length;
+    }
+  }
+  throw new Error('セクションの終端が見つかりません');
+}
+
+async function pushSection(section) {
+  const cfg = loadGithubConfig();
+  if (!cfg.token || !cfg.repo) {
+    alert('先に「設定」タブで GitHub の情報を保存してください');
+    return;
+  }
+  const parts = cfg.repo.split('/');
+  if (parts.length !== 2) {
+    alert('REPOSITORY は "owner/repo" 形式で入力してください');
+    return;
+  }
+  const [owner, repo] = parts;
+  const branch = cfg.branch || 'main';
+  const className = section === 'news' ? 'news-list' : 'blog-list';
+  const innerHtml = section === 'news' ? generateNewsHtml() : generateBlogHtml();
+  if (innerHtml.startsWith('（')) {
+    alert(`${section.toUpperCase()} データが空です。先に何か追加してください`);
+    return;
+  }
+  const message = section === 'news' ? 'update news via admin' : 'update blog via admin';
+  try {
+    showToast('index.html を取得中...');
+    const file = await githubGetFile(owner, repo, 'index.html', branch, cfg.token);
+    const newContent = replaceListSection(file.content, className, innerHtml);
+    if (newContent === file.content) {
+      showToast('変更がありません');
+      return;
+    }
+    showToast('GitHub にプッシュ中...');
+    await githubUpdateFile(owner, repo, 'index.html', branch, cfg.token, newContent, file.sha, message);
+    showToast(`✅ ${section.toUpperCase()} を HP に反映しました（数分で本番表示）`);
+  } catch (e) {
+    alert('エラー：' + e.message + '\n\nTokenの権限、リポジトリ名を確認してください');
+  }
+}
+
+// ============ Settings UI ============
+const ghRepo = document.getElementById('ghRepo');
+const ghBranch = document.getElementById('ghBranch');
+const ghToken = document.getElementById('ghToken');
+const ghSaveLocal = document.getElementById('ghSaveLocal');
+
+// 起動時に既存設定をロード
+(function() {
+  const cfg = loadGithubConfig();
+  if (cfg.repo) ghRepo.value = cfg.repo;
+  if (cfg.branch) ghBranch.value = cfg.branch;
+  if (cfg.token) ghToken.value = cfg.token;
+})();
+
+document.getElementById('btnSaveGh').addEventListener('click', () => {
+  const cfg = {
+    repo: ghRepo.value.trim(),
+    branch: ghBranch.value.trim() || 'main'
+  };
+  if (ghSaveLocal.checked) cfg.token = ghToken.value.trim();
+  else cfg.token = ghToken.value.trim(); // セッション中は保持
+  saveGithubConfig(cfg);
+  showToast('設定を保存しました');
+});
+
+document.getElementById('btnClearGh').addEventListener('click', () => {
+  if (!confirm('保存済みの GitHub 設定を消去します。よろしいですか？')) return;
+  clearGithubConfig();
+  ghRepo.value = '';
+  ghBranch.value = 'main';
+  ghToken.value = '';
+  showToast('設定を消去しました');
+});
+
+document.getElementById('btnTestConn').addEventListener('click', async () => {
+  const result = document.getElementById('testResult');
+  const cfg = { repo: ghRepo.value.trim(), branch: ghBranch.value.trim() || 'main', token: ghToken.value.trim() };
+  const parts = cfg.repo.split('/');
+  if (parts.length !== 2 || !cfg.token) {
+    result.style.display = 'block';
+    result.style.background = 'rgba(184, 90, 60, 0.1)';
+    result.style.color = 'var(--danger)';
+    result.textContent = '❌ REPOSITORY と TOKEN を正しく入力してください';
+    return;
+  }
+  const [owner, repo] = parts;
+  try {
+    result.style.display = 'block';
+    result.style.background = 'rgba(117, 147, 179, 0.1)';
+    result.style.color = 'var(--c3)';
+    result.textContent = '⏳ 接続中...';
+    const file = await githubGetFile(owner, repo, 'index.html', cfg.branch, cfg.token);
+    result.style.background = 'rgba(127, 168, 140, 0.15)';
+    result.style.color = 'var(--c2)';
+    result.textContent = `✅ 接続成功。index.html (${file.content.length}文字) を取得しました。`;
+  } catch (e) {
+    result.style.background = 'rgba(184, 90, 60, 0.1)';
+    result.style.color = 'var(--danger)';
+    result.textContent = '❌ 接続失敗：' + e.message;
+  }
+});
+
+// Push ボタン
+document.getElementById('btnPushNews').addEventListener('click', () => pushSection('news'));
+document.getElementById('btnPushBlog').addEventListener('click', () => pushSection('blog'));
 
 // ============ Init ============
 renderNews();
