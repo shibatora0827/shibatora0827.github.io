@@ -353,6 +353,15 @@ main {
   color: var(--ink-mid);
   line-height: 1.85;
 }
+.work-store {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--ink-mid);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+}
+.work-store:hover { color: var(--ink); border-bottom-color: var(--ink); }
 .work-tag {
   font-family: 'Cormorant Garamond', serif;
   font-size: 11px;
@@ -836,17 +845,18 @@ footer {
 <section id="works">
   <span class="section-title">WORKS</span>
   <p class="section-lead">
-    iPadだけでつくった、10本のiOSアプリ。<br>
+    iPadだけでつくった、9本のiOSアプリ。<br>
     特別支援教育・小学生・教員のための、小さな道具です。
   </p>
   <div class="works-list">
     <div class="work-item">
       <div class="work-num">01</div>
       <div class="work-body">
-        <h3>かんじで GO</h3>
+        <h3>漢字でGO（かんじで GO）</h3>
         <p>縦書き明朝体の漢字読みクイズ。都道府県、私鉄駅名、生活の言葉まで13ジャンル。</p>
+        <a class="work-store" href="https://apps.apple.com/jp/app/id6797763820" target="_blank" rel="noopener">App Store で見る →</a>
       </div>
-      <span class="work-tag">¥3,000 / SUB</span>
+      <span class="work-tag">FREE</span>
     </div>
     <div class="work-item">
       <div class="work-num">02</div>
@@ -854,7 +864,7 @@ footer {
         <h3>ぷかっと</h3>
         <p>アイデアを泡で溜めるメモアプリ。ふわふわ動く直感UI。</p>
       </div>
-      <span class="work-tag">¥2,400 / SUB</span>
+      <span class="work-tag">FREE</span>
     </div>
     <div class="work-item">
       <div class="work-num">03</div>
@@ -862,42 +872,34 @@ footer {
         <h3>みんなでポン</h3>
         <p>動画・音声のBPMと目印付けができる、教員向けの小さな道具。</p>
       </div>
-      <span class="work-tag">¥800</span>
+      <span class="work-tag">FREE</span>
     </div>
     <div class="work-item">
       <div class="work-num">04</div>
       <div class="work-body">
-        <h3>ぴっとレジ</h3>
-        <p>POSレジ模擬。特別支援教育、家庭療育の買い物学習に。</p>
+        <h3>マイ9</h3>
+        <p>1日9マスで目標を可視化。習慣を、ヒートマップで積み重ねる。</p>
       </div>
-      <span class="work-tag">¥800</span>
+      <span class="work-tag">FREE</span>
     </div>
     <div class="work-item">
       <div class="work-num">05</div>
       <div class="work-body">
-        <h3>マイ9</h3>
-        <p>1日9マスで目標を可視化。習慣を、ヒートマップで積み重ねる。</p>
+        <h3>ことばずかん（こえずかん）</h3>
+        <p>ひらがな五十音の発音を、音声認識で優しくサポート。</p>
       </div>
-      <span class="work-tag">¥600</span>
+      <span class="work-tag">FREE</span>
     </div>
     <div class="work-item">
       <div class="work-num">06</div>
       <div class="work-body">
-        <h3>かな練習</h3>
-        <p>ひらがな五十音の発音を、音声認識で優しくサポート。</p>
-      </div>
-      <span class="work-tag">¥240</span>
-    </div>
-    <div class="work-item">
-      <div class="work-num">07</div>
-      <div class="work-body">
-        <h3>BokashiPro</h3>
+        <h3>すぐぼかし（BokashiPro）</h3>
         <p>写真の顔や情報をさっとぼかす。教員必携の道具。</p>
       </div>
       <span class="work-tag">FREE</span>
     </div>
     <div class="work-item">
-      <div class="work-num">08</div>
+      <div class="work-num">07</div>
       <div class="work-body">
         <h3>ぴっとペイ</h3>
         <p>ぴっとレジのペア。電子マネーの練習に。</p>
@@ -905,18 +907,18 @@ footer {
       <span class="work-tag">FREE</span>
     </div>
     <div class="work-item">
-      <div class="work-num">09</div>
+      <div class="work-num">08</div>
       <div class="work-body">
         <h3>めあてカウント</h3>
-        <p>大きな「＋1」で回数を数え、めあてに届いたら短いおいわい。記録は棒グラフに。アカウント不要・データは iPad の中だけ。（App Store 公開準備中）</p>
+        <p>大きな「＋1」で回数を数え、めあてに届いたら短いおいわい。記録は棒グラフに。アカウント不要・データは iPad の中だけ。</p>
       </div>
       <span class="work-tag">FREE</span>
     </div>
     <div class="work-item">
-      <div class="work-num">10</div>
+      <div class="work-num">09</div>
       <div class="work-body">
         <h3>めせんでトーク</h3>
-        <p>見つめるだけでカードを選んで、声で伝える VOCA。タッチ・スイッチ・視線で選べて、スケジュールやクイズ、リレー基板でおもちゃも動かせます。データは iPad の中だけ。（App Store 公開準備中）</p>
+        <p>見つめるだけでカードを選んで、声で伝える VOCA。タッチ・スイッチ・視線で選べて、スケジュールやクイズ、リレー基板でおもちゃも動かせます。データは iPad の中だけ。</p>
       </div>
       <span class="work-tag">FREE</span>
     </div>
@@ -943,7 +945,7 @@ footer {
       <span class="service-cat">NOTE</span>
       <div>
         <div class="service-title">教育note</div>
-        <div class="service-desc">現場でのできごと、道具の使い方、悩み。月水金 更新中。</div>
+        <div class="service-desc">現場でのできごと、道具の使い方、悩み。火・木 更新中。</div>
       </div>
       <span class="service-arrow">→</span>
     </div>
